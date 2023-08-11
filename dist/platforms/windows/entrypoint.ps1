@@ -9,10 +9,10 @@ regsvr32 C:\ProgramData\Microsoft\VisualStudio\Setup\x64\Microsoft.VisualStudio.
 & "c:\steps\set_gitcredential.ps1"
 
 # Activate Unity
-& "c:\steps\activate.ps1"
+#& "c:\steps\activate.ps1"
 
 # Build the project
-& "c:\steps\build.ps1"
+#& "c:\steps\build.ps1"
 
 # Free the seat for the activated license
 & "c:\steps\return_license.ps1"
