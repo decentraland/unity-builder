@@ -9,10 +9,23 @@ regsvr32 C:\ProgramData\Microsoft\VisualStudio\Setup\x64\Microsoft.VisualStudio.
 & "c:\steps\set_gitcredential.ps1"
 
 # Activate Unity
-#& "c:\steps\activate.ps1"
+& "c:\steps\activate.ps1"
 
-# Build the project
-#& "c:\steps\build.ps1"
+# Build with timeout
+$timeoutSeconds = 60 # 1 hour timeout
+$code = {
+    # Build the project
+    & "c:\steps\build.ps1"
+}
+Write-Output "$('> Start Job')"
+$j = Start-Job -ScriptBlock $code
+if (Wait-Job $j -Timeout $timeoutSeconds) {
+    Receive-Job $j
+    Write-Output "$('> Job Completed')"
+} else {
+    Write-Output "$('> Job Interrupted')"
+}
+Remove-Job -force $j
 
 # Free the seat for the activated license
 & "c:\steps\return_license.ps1"
