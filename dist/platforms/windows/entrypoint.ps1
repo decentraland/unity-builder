@@ -12,7 +12,7 @@ regsvr32 C:\ProgramData\Microsoft\VisualStudio\Setup\x64\Microsoft.VisualStudio.
 & "c:\steps\activate.ps1"
 
 # Build with timeout
-$timeoutSeconds = 60 # 1 hour timeout
+$timeoutSeconds = $Env:BUILD_TIMEOUT * 60
 $code = {
     # Build the project
     & "c:\steps\build.ps1"

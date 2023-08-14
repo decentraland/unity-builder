@@ -213,6 +213,10 @@ inputs:
     description:
       'The path to mount the workspace inside the docker container. For windows, leave out the drive letter. For example
       c:/github/workspace should be defined as /github/workspace'
+  buildTimeout:
+    description: 'Build Timeout'
+    required: false
+    default: '60'
 
 outputs:
   volume:

@@ -6,6 +6,8 @@ class SetupWindows {
   public static async setup(buildParameters: BuildParameters) {
     const { targetPlatform } = buildParameters;
 
+    process.env.BUILD_TIMEOUT = buildParameters.buildTimeout;
+
     await SetupWindows.setupWindowsRun(targetPlatform);
   }
 
