@@ -23,6 +23,7 @@ if (Wait-Job $j -Timeout $timeoutSeconds) {
     Receive-Job $j
     Write-Output "$('> Job Completed')"
 } else {
+    Receive-Job $j
     Write-Output "$('> Job Interrupted')"
 }
 Remove-Job -force $j
