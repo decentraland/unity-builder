@@ -1,5 +1,5 @@
 {
-  "name": "unity-return-license",
+  "name": "unity-builder",
   "version": "2.0.0",
   "description": "Build Unity projects for different platforms.",
   "main": "dist/index.js",
