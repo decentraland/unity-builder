@@ -110,7 +110,6 @@ export default class Versioning {
     }
 
     const branchName = (await this.git(['rev-parse', '--abbrev-ref', 'HEAD'])).trim();
-    // Use git command to get the short SHA of the latest commit.
     const shortSha = (await this.git(['rev-parse', '--short', 'HEAD'])).trim();
 
     if (!(await this.hasAnyVersionTags())) {
