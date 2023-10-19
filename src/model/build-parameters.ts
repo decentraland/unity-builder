@@ -83,7 +83,6 @@ class BuildParameters {
   public cacheUnityInstallationOnMac!: boolean;
   public unityHubVersionOnMac!: string;
   public dockerWorkspacePath!: string;
-  public buildTimeout!: number;
 
   public static shouldUseRetainedWorkspaceMode(buildParameters: BuildParameters) {
     return buildParameters.maxRetainedWorkspaces > 0 && CloudRunner.lockedWorkspace !== ``;
