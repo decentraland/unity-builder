@@ -27,7 +27,9 @@ namespace UnityBuilderAction.Versioning
 
       Console.WriteLine($"Version is {version}");
 
-      return version;
+      string branchName = Run(@"git rev-parse --abbrev-ref HEAD");
+      string shortCommitSHA = Run(@"git rev-parse --short HEAD");
+      return version + "-" + branchName + "-" + shortCommitSHA;
     }
 
     /// <summary>

@@ -109,8 +109,12 @@ export default class Versioning {
       throw new Error('Branch is dirty. Refusing to base semantic version on uncommitted changes');
     }
 
+    const branchName = (await this.git(['rev-parse', '--abbrev-ref', 'HEAD'])).trim();
+    // Use git command to get the short SHA of the latest commit.
+    const shortSha = (await this.git(['rev-parse', '--short', 'HEAD'])).trim();
+
     if (!(await this.hasAnyVersionTags())) {
-      const version = `0.0.${await this.getTotalNumberOfCommits()}`;
+      const version = `0.0.${await this.getTotalNumberOfCommits()}-${branchName}-${shortSha}`;
       core.info(`Generated version ${version} (no version tags found).`);
 
       return version;
@@ -126,10 +130,10 @@ export default class Versioning {
 
       core.info(`Found semantic version ${threeDigitVersion} for ${this.branch}@${hash}`);
 
-      return `${threeDigitVersion}`;
+      return `${threeDigitVersion}-${branchName}-${shortSha}`;
     }
 
-    const version = `0.0.${await this.getTotalNumberOfCommits()}`;
+    const version = `0.0.${await this.getTotalNumberOfCommits()}-${branchName}-${shortSha}`;
     core.info(`Generated version ${version} (semantic version couldn't be determined).`);
 
     return version;
