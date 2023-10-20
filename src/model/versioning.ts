@@ -109,8 +109,10 @@ export default class Versioning {
       throw new Error('Branch is dirty. Refusing to base semantic version on uncommitted changes');
     }
 
-
-    const shortSha = (await this.git(['rev-parse', '--short', 'HEAD'])).trim();
+    const isPullRequest = process.env['GITHUB_EVENT_NAME'] === 'pull_request';
+    const shortSha = isPullRequest
+      ? process.env['GITHUB_SHA'].slice(0, 7) // Use the first 7 characters as a short SHA
+      : (await this.git(['rev-parse', '--short', 'HEAD'])).trim();
 
     if (!(await this.hasAnyVersionTags())) {
       const version = `0.0.${await this.getTotalNumberOfCommits()}-${this.branch}-${shortSha}`;
