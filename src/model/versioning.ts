@@ -20,6 +20,10 @@ export default class Versioning {
     return this.headRef || this.ref?.slice(11);
   }
 
+  static get sha() {
+    return process.env.CUSTOM_SHA;
+  }
+
   /**
    * For pull requests we can reliably use GITHUB_HEAD_REF
    */
@@ -109,13 +113,10 @@ export default class Versioning {
       throw new Error('Branch is dirty. Refusing to base semantic version on uncommitted changes');
     }
 
-    const isPullRequest = process.env['GITHUB_EVENT_NAME'] === 'pull_request';
-    const shortSha = isPullRequest
-      ? process.env['GITHUB_SHA'].slice(0, 7) // Use the first 7 characters as a short SHA
-      : (await this.git(['rev-parse', '--short', 'HEAD'])).trim();
+    const customBranchNaming = this.branch?.replace(/\//g, '-');
 
     if (!(await this.hasAnyVersionTags())) {
-      const version = `0.0.${await this.getTotalNumberOfCommits()}-${this.branch}-${shortSha}`;
+      const version = `0.0.${await this.getTotalNumberOfCommits()}-${customBranchNaming}-${this.sha}`;
       core.info(`Generated version ${version} (no version tags found).`);
 
       return version;
@@ -129,12 +130,12 @@ export default class Versioning {
       const [major, minor, patch] = `${tag}.${commits}`.split('.');
       const threeDigitVersion = /^\d+$/.test(patch) ? `${major}.${minor}.${patch}` : `${major}.0.${minor}`;
 
-      core.info(`Found semantic version ${threeDigitVersion}-${this.branch}-${shortSha} for ${this.branch}@${hash}`);
+      core.info(`Found semantic version ${threeDigitVersion}-${customBranchNaming}-${this.sha} for ${this.branch}@${customBranchNaming}`);
 
-      return `${threeDigitVersion}-${this.branch}-${shortSha}`;
+      return `${threeDigitVersion}-${customBranchNaming}-${this.sha}`;
     }
 
-    const version = `0.0.${await this.getTotalNumberOfCommits()}-${this.branch}-${shortSha}`;
+    const version = `0.0.${await this.getTotalNumberOfCommits()}-${customBranchNaming}-${this.sha}`;
     core.info(`Generated version ${version} (semantic version couldn't be determined).`);
 
     return version;
