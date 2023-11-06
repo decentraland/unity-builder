@@ -11,7 +11,7 @@ function SafeCall($Code, $NoOutputTimeout, $Timeout) {
     While ($true) {
         if ($i -eq $NoOutputChecks) {
             Write-Output "$('SafeCall> Process cancelled by total timeout.')"
-            Break    
+            Break
         }
         $i += 1
 
@@ -69,7 +69,7 @@ $ReturnLicenseCode = {
 
 SafeCall $ActivateCode 600 $timeoutSeconds
 SafeCall $BuildCode 1200 $timeoutSeconds
-SafeCall $ReturnLicenseCode 600 $timeoutSeconds& "c:\steps\return_license.ps1"
+SafeCall $ReturnLicenseCode 600 $timeoutSeconds
 
 Start-Sleep -Seconds 3
 Get-Process
