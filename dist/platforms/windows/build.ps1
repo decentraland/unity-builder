@@ -159,7 +159,7 @@ $unityArgs = $unityArgs | Where-Object { $_ -ne $null }
 $process = Start-Process -FilePath "$Env:UNITY_PATH\Editor\Unity.exe" `
                          -ArgumentList $unityArgs `
                          -PassThru `
-                         -NoNewWindow
+                         -WindowStyle Hidden
 
 while (!$process.HasExited) {
     if ($process.HasExited) {
