@@ -51,25 +51,34 @@ $timeoutSeconds = 60 * 60
 # Setup Git Credentials
 & "c:\steps\set_gitcredential.ps1"
 
-# Activate Unity
-$ActivateCode = {
-    & "c:\steps\activate.ps1"
-}
+# # Activate Unity
+# $ActivateCode = {
+#     & "c:\steps\activate.ps1"
+# }
+#
+# # Build with timeout
+# $BuildCode = {
+#     # Build the project
+#     & "c:\steps\build.ps1"
+# }
+#
+# # Free the seat for the activated license
+# $ReturnLicenseCode = {
+#     & "c:\steps\return_license.ps1"
+# }
+#
+# SafeCall $ActivateCode 600 $timeoutSeconds
+# SafeCall $BuildCode 1200 $timeoutSeconds
+# SafeCall $ReturnLicenseCode 600 $timeoutSeconds
 
-# Build with timeout
-$BuildCode = {
-    # Build the project
-    & "c:\steps\build.ps1"
-}
+# Activate Unity
+& "c:\steps\activate.ps1"
+
+# Build the project
+& "c:\steps\build.ps1"
 
 # Free the seat for the activated license
-$ReturnLicenseCode = {
-    & "c:\steps\return_license.ps1"
-}
-
-SafeCall $ActivateCode 600 $timeoutSeconds
-SafeCall $BuildCode 1200 $timeoutSeconds
-SafeCall $ReturnLicenseCode 600 $timeoutSeconds
+& "c:\steps\return_license.ps1"
 
 Start-Sleep -Seconds 3
 Get-Process
