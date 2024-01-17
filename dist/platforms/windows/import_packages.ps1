@@ -1,5 +1,4 @@
 # Imports Unity packages from the specified directory
-
 $UnityExecutable = "C:\Program Files\Unity\Hub\Editor\$Env:UNITY_VERSION\Editor\Unity.exe"
 $UnityProjectPath = "$Env:GITHUB_WORKSPACE\$Env:PROJECT_PATH"
 $RequiredPackagesPath = "$UnityProjectPath\Assets\RequiredPackages\requiredPackages.unitypackage"
