@@ -9,7 +9,7 @@ function SafeCall($Code, $NoOutputTimeout, $Timeout) {
     While ($true) {
         if ($i -eq $NoOutputChecks) {
             Write-Output "$('SafeCall> Process cancelled by total timeout.')"
-            Break    
+            Break
         }
         $i += 1
 
@@ -52,6 +52,11 @@ $ActivateCode = {
     & "c:\steps\activate.ps1"
 }
 
+# Import Packages into Unity
+$ImportPackages = {
+    & "c:\steps\import_packages.ps1"
+}
+
 # Build with timeout
 $BuildCode = {
     # Build the project
@@ -64,5 +69,6 @@ $ReturnLicenseCode = {
 }
 
 SafeCall $ActivateCode 600 $timeoutSeconds
+SafeCall $ImportPackages 1200 $timeoutSeconds
 SafeCall $BuildCode 1200 $timeoutSeconds
 SafeCall $ReturnLicenseCode 600 $timeoutSeconds
