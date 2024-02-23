@@ -68,7 +68,7 @@ $ReturnLicenseCode = {
     & "c:\steps\return_license.ps1"
 }
 
-SafeCall $ActivateCode 600 $timeoutSeconds
-SafeCall $ImportPackages 1200 $timeoutSeconds
-SafeCall $BuildCode 1200 $timeoutSeconds
-SafeCall $ReturnLicenseCode 600 $timeoutSeconds
+SafeCall $ActivateCode 1200 $timeoutSeconds
+SafeCall $ImportPackages 1800 $timeoutSeconds
+SafeCall $BuildCode 1800 $timeoutSeconds
+SafeCall $ReturnLicenseCode 1200 $timeoutSeconds
