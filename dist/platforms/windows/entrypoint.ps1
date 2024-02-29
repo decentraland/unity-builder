@@ -52,11 +52,6 @@ $ActivateCode = {
     & "c:\steps\activate.ps1"
 }
 
-# Import Packages into Unity
-$ImportPackages = {
-    & "c:\steps\import_packages.ps1"
-}
-
 # Build with timeout
 $BuildCode = {
     # Build the project
@@ -69,6 +64,5 @@ $ReturnLicenseCode = {
 }
 
 SafeCall $ActivateCode 1200 $timeoutSeconds
-SafeCall $ImportPackages 1800 $timeoutSeconds
 SafeCall $BuildCode 1800 $timeoutSeconds
 SafeCall $ReturnLicenseCode 1200 $timeoutSeconds
