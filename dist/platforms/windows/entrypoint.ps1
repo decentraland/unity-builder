@@ -64,5 +64,5 @@ $ReturnLicenseCode = {
 }
 
 SafeCall $ActivateCode 1200 $timeoutSeconds
-SafeCall $BuildCode 1800 $timeoutSeconds
+SafeCall $BuildCode 3600 $timeoutSeconds
 SafeCall $ReturnLicenseCode 1200 $timeoutSeconds
