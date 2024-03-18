@@ -42,7 +42,7 @@ Get-ChildItem -Path c:\regkeys -File | Foreach {reg import $_.fullname}
 # Register the Visual Studio installation so Unity can find it
 regsvr32 C:\ProgramData\Microsoft\VisualStudio\Setup\x64\Microsoft.VisualStudio.Setup.Configuration.Native.dll
 
-$timeoutSeconds = 60 * 60
+$timeoutSeconds = 2 * 60 * 60
 
 # Setup Git Credentials
 & "c:\steps\set_gitcredential.ps1"
